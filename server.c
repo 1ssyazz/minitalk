@@ -6,7 +6,7 @@
 /*   By: msukri <msukri@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:01:34 by msukri            #+#    #+#             */
-/*   Updated: 2022/05/19 16:20:36 by msukri           ###   ########.fr       */
+/*   Updated: 2022/05/20 16:55:24 by msukri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	str_count_to_client(int signal, siginfo_t *source, void *context)
 	if (++i == 8)
 	{
 		i = 0;
-		printf("%c", c);
 		if (!c)
 		{
 			kill(client_pid, SIGUSR2);

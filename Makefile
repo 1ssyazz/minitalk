@@ -7,6 +7,8 @@ LIB_PATH	=	./libft
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 
+NAME		= server client
+
 all: libft server client
 
 libft:

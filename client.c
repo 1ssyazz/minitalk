@@ -6,7 +6,7 @@
 /*   By: msukri <msukri@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:01:27 by msukri            #+#    #+#             */
-/*   Updated: 2022/05/20 15:41:42 by msukri           ###   ########.fr       */
+/*   Updated: 2022/05/20 16:53:55 by msukri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ int	handle_bit(int server_pid, char c)
 		if (bit & c)
 		{
 			if (kill(server_pid, SIGUSR2) == -1)
-				return (0);
+				exit(0);
 		}
 		else
 		{
 			if (kill(server_pid, SIGUSR1) == -1)
-				return (0);
+				exit(0);
 		}
 		bit >>= 1;
-		usleep(100);
+		usleep(300);
 	}
 	return (1);
 }
