@@ -6,7 +6,7 @@
 /*   By: msukri <msukri@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:01:27 by msukri            #+#    #+#             */
-/*   Updated: 2022/05/20 16:53:55 by msukri           ###   ########.fr       */
+/*   Updated: 2022/05/23 14:27:54 by msukri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ int	handle_bit(int server_pid, char c)
 		if (bit & c)
 		{
 			if (kill(server_pid, SIGUSR2) == -1)
-				exit(0);
+				return (0);
 		}
 		else
 		{
 			if (kill(server_pid, SIGUSR1) == -1)
-				exit(0);
+				return (0);
 		}
 		bit >>= 1;
 		usleep(300);
@@ -65,7 +65,7 @@ int	send_str_to_server(char *str, int server_pid)
 
 int	main(int argc, char **argv)
 {
-	//struct sigaction	b_sigaction;
+	struct sigaction	b_sigaction;
 
 	if (argc != 3 || !ft_strlen(argv[2]))
 		return (1);
@@ -73,9 +73,9 @@ int	main(int argc, char **argv)
 	ft_putnbr_fd(ft_strlen(argv[2]), 1);
 	ft_putchar_fd('\n', 1);
 	ft_putstr_fd("Received	: ", 1);
-	//b_sigaction.sa_handler = &string_count;
-	signal(SIGUSR1, string_count);
-	signal(SIGUSR2, string_count);
+	b_sigaction.sa_handler = &string_count;
+	sigaction(SIGUSR1, &b_sigaction, 0);
+	sigaction(SIGUSR2, &b_sigaction, 0);
 	send_str_to_server(argv[2], ft_atoi(argv[1]));
 	while (1)
 		pause();
